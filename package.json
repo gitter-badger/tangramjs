@@ -1,0 +1,71 @@
+{
+    "name": "tangramjs",
+    "version": "0.1.0",
+    "description": "A library for class-free object-oriented programming in JavaScript.",
+    "keywords": [
+        "tangram",
+        "class",
+        "free",
+        "object",
+        "oriented",
+        "programming",
+        "factory",
+        "function",
+        "oop"
+    ],
+    "author": {
+        "name": "Clemens Akens",
+        "email": "clebert@me.com",
+        "url": "http://clebert.com/"
+    },
+    "bugs": {
+        "url": "https://github.com/clebert/tangramjs/issues"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.githubusercontent.com/clebert/tangramjs/master/LICENSE"
+        }
+    ],
+    "main": "src/tangram.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/clebert/tangramjs.git"
+    },
+    "config": {
+        "mocha-cov-reporter": {
+            "failOnError": true,
+            "threshold": 100,
+            "useColors": true
+        }
+    },
+    "scripts": {
+        "test": "node_modules/.bin/grunt"
+    },
+    "devDependencies": {
+        "blanket": "latest",
+        "codeclimate-test-reporter": "latest",
+        "expressive-assertion": "latest",
+        "grunt": "latest",
+        "grunt-bumpup": "latest",
+        "grunt-cli": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-jscs": "latest",
+        "grunt-karma": "latest",
+        "grunt-mocha-test": "latest",
+        "grunt-module": "latest",
+        "karma": "latest",
+        "karma-browserify": "latest",
+        "karma-mocha": "latest",
+        "karma-sauce-launcher": "latest",
+        "karma-spec-reporter": "latest",
+        "load-grunt-tasks": "latest",
+        "mocha": "latest",
+        "mocha-cov-reporter": "latest",
+        "mocha-lcov-reporter": "latest",
+        "time-grunt": "latest"
+    }
+}
