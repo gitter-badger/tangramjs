@@ -127,8 +127,12 @@ exports.testFactory = function (initializer, data, descriptors) {
                                 return object[descriptor.name] === 123;
                             });
                         } else {
-                            assert.throws(function () {
-                                object[descriptor.name] = 123;
+                            assert(function () {
+                                try {
+                                    object[descriptor.name] = 123;
+                                } catch (e) {}
+
+                                return object[descriptor.name] === descriptor.value;
                             });
                         }
                     });
