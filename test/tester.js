@@ -21,12 +21,12 @@ var getFactoryName = function (aFunction) {
     return /(\S+)/.exec(getStatement(aFunction))[1];
 };
 
-exports.testFactory = function (initializer, data, descriptors) {
+exports.testFactory = function (initializer, spec, descriptors) {
     var factory = initializer();
     var factoryName = getFactoryName(initializer);
 
     var createObject = function () {
-        return data ? factory(data) : factory();
+        return spec ? factory(spec) : factory();
     };
 
     describe(getStatement(initializer), function () {
@@ -57,14 +57,20 @@ exports.testFactory = function (initializer, data, descriptors) {
                 });
 
                 it('is non-writable', function () {
-                    assert.throws(function () {
-                        factory[methodName] = function () {};
+                    assert(function () {
+                        var method = factory[methodName];
+
+                        try {
+                            factory[methodName] = function () {};
+                        } catch (e) {}
+
+                        return factory[methodName] === method;
                     });
                 });
             });
         });
 
-        describe('object = ' + factoryName + '(' + (data ? JSON.stringify(data) : '') + ')', function () {
+        describe('object = ' + factoryName + '(' + (spec ? JSON.stringify(spec) : '') + ')', function () {
             it('is an object', function () {
                 assert(function () {
                     return typeof createObject() === 'object';

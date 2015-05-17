@@ -36,12 +36,12 @@ var createObject = require('tangramjs').createObject;
 This is the *abstract* base factory of Tangram.js.
 It describes no properties and can only create new immutable *empty* objects.
 
-### factory([data])
+### factory([spec])
 
 Creates a new object which has an immutable set of own properties and no prototype.
 Thus, such a created object with only non-writable properties and only immutable property values is effectively immutable.
 
-With the optional argument `data` the default values of specific properties, writable or not, can be overwritten at construction time (see [Example 2](#example-2-creating-an-object-that-behaves-like-it-inherits-from-objectprototype)).
+With the optional argument `spec` the default values of specific properties, writable or not, can be overwritten at construction time (see [Example 2](#example-2-creating-an-object-that-behaves-like-it-inherits-from-objectprototype)).
 
 ### factory.val(name[, defaultValue])
 
