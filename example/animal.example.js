@@ -48,8 +48,6 @@ var createGoat = createTalkingAnimal
     .val('name', 'goat')
     .val('word', 'baa');
 
-/******************************************************************************/
-
 var alligator = createAlligator();
 
 alligator.swim(); // alligator makes splish splash

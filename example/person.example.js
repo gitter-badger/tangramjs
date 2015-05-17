@@ -13,8 +13,6 @@ var createPerson = createStandardObject
     .val('name', 'John Doe')
     .val('age', 0);
 
-/******************************************************************************/
-
 var person = createPerson({
     name: 'Jane Doe',
     age: 99

@@ -6,7 +6,7 @@ if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
     process.exit(1);
 }
 
-var customLaunchers = {
+var customLaunchers = { // See, https://saucelabs.com/platforms/
     sauceLabsInternetExplorer9: {
         base: 'SauceLabs',
         browserName: 'internet explorer',
@@ -29,13 +29,13 @@ var customLaunchers = {
         base: 'SauceLabs',
         browserName: 'chrome',
         platform: 'Linux',
-        version: '39.0'
+        version: '42.0'
     },
     sauceLabsFirefox: {
         base: 'SauceLabs',
         browserName: 'firefox',
         platform: 'Linux',
-        version: '34.0'
+        version: '37.0'
     },
     sauceLabsSafari7: {
         base: 'SauceLabs',
