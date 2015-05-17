@@ -9,3 +9,9 @@ branches:
   only: "master"
 
 script: "node_modules/.bin/grunt travis"
+
+after_script: "node_modules/.bin/codeclimate < test/lcov.info"
+
+addons:
+  code_climate:
+    repo_token: "f318493b319b93c3368472cedb300ee452e5393cb5345f7fdee47eeb2bf158ab"
