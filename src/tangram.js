@@ -25,8 +25,8 @@ var getPropertyValue = function (object, descriptor) {
 
 var createFactory = function (descriptors) {
     var factory = function (data) {
-        return Object.freeze(descriptors.reduce(function (instance, descriptor) {
-            return defineProperty(instance, descriptor, getPropertyValue(data, descriptor));
+        return Object.freeze(descriptors.reduce(function (object, descriptor) {
+            return defineProperty(object, descriptor, getPropertyValue(data, descriptor));
         }, Object.create(null)));
     };
 

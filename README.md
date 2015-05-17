@@ -31,32 +31,37 @@ var createObject = require('tangramjs').createObject;
 
 ## API
 
+### createObject
+
+This is the *abstract* base factory of Tangram.js.
+It describes no properties and can only create new immutable *empty* objects.
+
 ### factory([data])
 
-Creates a new instance which has an immutable set of own properties and no prototype.
-Thus, an instance with only non-writable properties and only immutable property values is effectively immutable.
+Creates a new object which has an immutable set of own properties and no prototype.
+Thus, such a created object with only non-writable properties and only immutable property values is effectively immutable.
 
-With the optional argument `data` the default values of specific instance properties, writable or not, can be overwritten at construction time (see [Example 2](#example-2-creating-an-object-that-behaves-like-it-inherits-from-objectprototype)).
+With the optional argument `data` the default values of specific properties, writable or not, can be overwritten at construction time (see [Example 2](#example-2-creating-an-object-that-behaves-like-it-inherits-from-objectprototype)).
 
 ### factory.val(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with an enumerable, non-writable property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for an enumerable, non-writable property.
 
 ### factory.var(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with an enumerable, writable property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for an enumerable, writable property.
 
 ### factory._val(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with an non-enumerable, non-writable property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for an non-enumerable, non-writable property.
 
 ### factory._var(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with an non-enumerable, writable property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for an non-enumerable, writable property.
 
 ### factory.ext(otherFactory)
 
-Creates a new factory by extending another factory with all properties of the factory on which this method is called.
+Creates a new factory by extending another factory with all property descriptors of the factory on which this method is called.
 
 ## References
 

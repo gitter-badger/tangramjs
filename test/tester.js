@@ -25,7 +25,7 @@ exports.testFactory = function (initializer, data, descriptors) {
     var factory = initializer();
     var factoryName = getFactoryName(initializer);
 
-    var createInstance = function () {
+    var createObject = function () {
         return data ? factory(data) : factory();
     };
 
@@ -64,71 +64,71 @@ exports.testFactory = function (initializer, data, descriptors) {
             });
         });
 
-        describe('instance = ' + factoryName + '(' + (data ? JSON.stringify(data) : '') + ')', function () {
+        describe('object = ' + factoryName + '(' + (data ? JSON.stringify(data) : '') + ')', function () {
             it('is an object', function () {
                 assert(function () {
-                    return typeof createInstance() === 'object';
+                    return typeof createObject() === 'object';
                 }, function () {
-                    return createInstance() !== null;
+                    return createObject() !== null;
                 });
             });
 
             it('is always new', function () {
                 assert(function () {
-                    return createInstance() !== createInstance();
+                    return createObject() !== createObject();
                 });
             });
 
             it('is frozen', function () {
                 assert(function () {
-                    return Object.isFrozen(createInstance());
+                    return Object.isFrozen(createObject());
                 });
             });
 
             it('has no prototype', function () {
                 assert(function () {
-                    return Object.getPrototypeOf(createInstance()) === null;
+                    return Object.getPrototypeOf(createObject()) === null;
                 });
             });
 
             it('has ' + descriptors.length + ' own properties', function () {
                 assert(function () {
-                    return Object.getOwnPropertyNames(createInstance()).length === descriptors.length;
+                    return Object.getOwnPropertyNames(createObject()).length === descriptors.length;
                 });
             });
 
             descriptors.forEach(function (descriptor) {
                 it('has an own property ' + JSON.stringify(descriptor.name), function () {
                     assert(function () {
-                        return hasOwnProperty(createInstance(), descriptor.name);
+                        return hasOwnProperty(createObject(), descriptor.name);
                     });
                 });
 
-                describe('instance.' + descriptor.name, function () {
+                describe('object.' + descriptor.name, function () {
                     it('returns ' + JSON.stringify(descriptor.value), function () {
                         assert(function () {
-                            return createInstance()[descriptor.name] === descriptor.value;
+                            return createObject()[descriptor.name] === descriptor.value;
                         });
                     });
 
                     it('is ' + (descriptor.enumerable ? '' : 'non-') + 'enumerable', function () {
                         assert(function () {
-                            return propertyIsEnumerable(createInstance(), descriptor.name) === descriptor.enumerable;
+                            return propertyIsEnumerable(createObject(), descriptor.name) === descriptor.enumerable;
                         });
                     });
 
                     it('is ' + (descriptor.writable ? '' : 'non-') + 'writable', function () {
-                        var instance = createInstance();
+                        var object = createObject();
 
                         if (descriptor.writable) {
                             assert(function () {
-                                instance[descriptor.name] = 123;
+                                object[descriptor.name] = 123;
 
-                                return instance[descriptor.name] === 123;
+                                return object[descriptor.name] === 123;
                             });
                         } else {
                             assert.throws(function () {
-                                instance[descriptor.name] = 123;
+                                object[descriptor.name] = 123;
                             });
                         }
                     });
