@@ -16,11 +16,12 @@ var createPerson = createStandardObject
 /******************************************************************************/
 
 var person = createPerson({
-    age: 29
+    name: 'Jane Doe',
+    age: 99
 });
 
-console.log(person.hasOwnProperty('name'));
-console.log(person.propertyIsEnumerable('name'));
-console.log(person.toLocaleString());
-console.log(person.toString());
-console.log(person.valueOf());
+console.log(person.hasOwnProperty('name')); // true
+console.log(person.propertyIsEnumerable('name')); // true
+console.log(person.toLocaleString()); // [object Object]
+console.log(person.toString()); // [object Object]
+console.log(person.valueOf()); // { name: 'Jane Doe', age: 99 }

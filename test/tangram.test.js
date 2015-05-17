@@ -15,11 +15,11 @@ describe('tangram', function () {
     var createObject1;
 
     tester.testFactory(function () {
-        return (createObject1 = createObject.val('p1', 'p1_I'));
+        return (createObject1 = createObject.val('name1', 'value1'));
     }, null, [
         {
-            name: 'p1',
-            value: 'p1_I',
+            name: 'name1',
+            value: 'value1',
             enumerable: true,
             writable: false
         }
@@ -28,11 +28,11 @@ describe('tangram', function () {
     var createObject2;
 
     tester.testFactory(function () {
-        return (createObject2 = createObject.var('p2', 'p2_I'));
+        return (createObject2 = createObject.var('name2', 'value2'));
     }, null, [
         {
-            name: 'p2',
-            value: 'p2_I',
+            name: 'name2',
+            value: 'value2',
             enumerable: true,
             writable: true
         }
@@ -41,11 +41,11 @@ describe('tangram', function () {
     var createObject3;
 
     tester.testFactory(function () {
-        return (createObject3 = createObject._val('p3', 'p3_I'));
+        return (createObject3 = createObject._val('name3', 'value3'));
     }, null, [
         {
-            name: 'p3',
-            value: 'p3_I',
+            name: 'name3',
+            value: 'value3',
             enumerable: false,
             writable: false
         }
@@ -54,11 +54,11 @@ describe('tangram', function () {
     var createObject4;
 
     tester.testFactory(function () {
-        return (createObject4 = createObject._var('p4', 'p4_I'));
+        return (createObject4 = createObject._var('name4', 'value4'));
     }, null, [
         {
-            name: 'p4',
-            value: 'p4_I',
+            name: 'name4',
+            value: 'value4',
             enumerable: false,
             writable: true
         }
@@ -70,26 +70,26 @@ describe('tangram', function () {
         return (createObject5 = createObject4.ext(createObject3.ext(createObject2.ext(createObject1))));
     }, null, [
         {
-            name: 'p1',
-            value: 'p1_I',
+            name: 'name1',
+            value: 'value1',
             enumerable: true,
             writable: false
         },
         {
-            name: 'p2',
-            value: 'p2_I',
+            name: 'name2',
+            value: 'value2',
             enumerable: true,
             writable: true
         },
         {
-            name: 'p3',
-            value: 'p3_I',
+            name: 'name3',
+            value: 'value3',
             enumerable: false,
             writable: false
         },
         {
-            name: 'p4',
-            value: 'p4_I',
+            name: 'name4',
+            value: 'value4',
             enumerable: false,
             writable: true
         }
@@ -98,35 +98,35 @@ describe('tangram', function () {
     var createObject6;
 
     tester.testFactory(function () {
-        return (createObject6 = createObject5._var('p1', 'p1_II').val('p5', 'p5_I'));
+        return (createObject6 = createObject5._var('name1').val('name5', null));
     }, null, [
         {
-            name: 'p1',
-            value: 'p1_II',
+            name: 'name1',
+            value: undefined,
             enumerable: false,
             writable: true
         },
         {
-            name: 'p2',
-            value: 'p2_I',
+            name: 'name2',
+            value: 'value2',
             enumerable: true,
             writable: true
         },
         {
-            name: 'p3',
-            value: 'p3_I',
+            name: 'name3',
+            value: 'value3',
             enumerable: false,
             writable: false
         },
         {
-            name: 'p4',
-            value: 'p4_I',
+            name: 'name4',
+            value: 'value4',
             enumerable: false,
             writable: true
         },
         {
-            name: 'p5',
-            value: 'p5_I',
+            name: 'name5',
+            value: null,
             enumerable: true,
             writable: false
         }
@@ -135,41 +135,41 @@ describe('tangram', function () {
     var createObject7;
 
     tester.testFactory(function () {
-        return (createObject7 = createObject5.var('p6', 'p6_I').ext(createObject6));
+        return (createObject7 = createObject5.var('name6', 'value6').ext(createObject6));
     }, null, [
         {
-            name: 'p1',
-            value: 'p1_I',
+            name: 'name1',
+            value: 'value1',
             enumerable: true,
             writable: false
         },
         {
-            name: 'p2',
-            value: 'p2_I',
+            name: 'name2',
+            value: 'value2',
             enumerable: true,
             writable: true
         },
         {
-            name: 'p3',
-            value: 'p3_I',
+            name: 'name3',
+            value: 'value3',
             enumerable: false,
             writable: false
         },
         {
-            name: 'p4',
-            value: 'p4_I',
+            name: 'name4',
+            value: 'value4',
             enumerable: false,
             writable: true
         },
         {
-            name: 'p5',
-            value: 'p5_I',
+            name: 'name5',
+            value: null,
             enumerable: true,
             writable: false
         },
         {
-            name: 'p6',
-            value: 'p6_I',
+            name: 'name6',
+            value: 'value6',
             enumerable: true,
             writable: true
         }
@@ -178,45 +178,44 @@ describe('tangram', function () {
     tester.testFactory(function () {
         return createObject7;
     }, {
-        p1: 'p1_II',
-        p2: 'p2_II',
-        p3: 'p3_II',
-        p4: 'p4_II',
-        p7: 'p7_I'
+        name1: true,
+        name2: false,
+        name3: null,
+        name7: 'value7'
     }, [
         {
-            name: 'p1',
-            value: 'p1_II',
+            name: 'name1',
+            value: true,
             enumerable: true,
             writable: false
         },
         {
-            name: 'p2',
-            value: 'p2_II',
+            name: 'name2',
+            value: false,
             enumerable: true,
             writable: true
         },
         {
-            name: 'p3',
-            value: 'p3_II',
+            name: 'name3',
+            value: null,
             enumerable: false,
             writable: false
         },
         {
-            name: 'p4',
-            value: 'p4_II',
+            name: 'name4',
+            value: 'value4',
             enumerable: false,
             writable: true
         },
         {
-            name: 'p5',
-            value: 'p5_I',
+            name: 'name5',
+            value: null,
             enumerable: true,
             writable: false
         },
         {
-            name: 'p6',
-            value: 'p6_I',
+            name: 'name6',
+            value: 'value6',
             enumerable: true,
             writable: true
         }

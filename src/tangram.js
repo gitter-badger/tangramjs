@@ -20,7 +20,7 @@ var defineProperty = function (object, descriptor, value) {
 };
 
 var getPropertyValue = function (object, descriptor) {
-    return (object && hasOwnProperty(object, descriptor.name)) ? object[descriptor.name] : descriptor.value;
+    return (object && hasOwnProperty(object, descriptor.name)) ? object[descriptor.name] : descriptor.defaultValue;
 };
 
 var createFactory = function (descriptors) {
@@ -31,13 +31,13 @@ var createFactory = function (descriptors) {
     };
 
     'val|var|_val|_var'.split('|').forEach(function (keyword) {
-        factory[keyword] = function (name, value) {
+        factory[keyword] = function (name, defaultValue) {
             return createFactory(descriptors.filter(function (descriptor) {
                 return descriptor.name !== name;
             }).concat({
                 keyword: keyword,
                 name: name,
-                value: value,
+                defaultValue: defaultValue,
                 enumerable: /^v/.test(keyword),
                 writable: /var/.test(keyword)
             }));
@@ -46,7 +46,7 @@ var createFactory = function (descriptors) {
 
     factory.ext = function (factory) {
         return descriptors.reduce(function (factory, descriptor) {
-            return factory[descriptor.keyword](descriptor.name, descriptor.value);
+            return factory[descriptor.keyword](descriptor.name, descriptor.defaultValue);
         }, factory);
     };
 

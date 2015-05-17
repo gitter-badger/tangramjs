@@ -119,17 +119,16 @@ exports.testFactory = function (initializer, data, descriptors) {
 
                     it('is ' + (descriptor.writable ? '' : 'non-') + 'writable', function () {
                         var instance = createInstance();
-                        var newValue = descriptor.value + 'I';
 
                         if (descriptor.writable) {
                             assert(function () {
-                                instance[descriptor.name] = newValue;
+                                instance[descriptor.name] = 123;
 
-                                return instance[descriptor.name] === newValue;
+                                return instance[descriptor.name] === 123;
                             });
                         } else {
                             assert.throws(function () {
-                                instance[descriptor.name] = newValue;
+                                instance[descriptor.name] = 123;
                             });
                         }
                     });

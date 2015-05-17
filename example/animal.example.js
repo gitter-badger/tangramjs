@@ -7,35 +7,44 @@ var createAnimal = createObject
 
 var createFlyingAnimal = createAnimal
     ._val('fly', function () {
-        return this.name + ' makes flap flap';
+        console.log(this.name + ' makes flap flap');
     });
 
 var createSwimmingAnimal = createAnimal
     ._val('swim', function () {
-        return this.name + ' makes splish splash';
+        console.log(this.name + ' makes splish splash');
     });
 
 var createTalkingAnimal = createAnimal
     .val('word', '...')
 
     ._val('talk', function () {
-        return this.name + ' says ' + this.word;
+        console.log(this.name + ' says ' + this.word);
     });
 
 var createWalkingAnimal = createAnimal
     ._val('walk', function () {
-        return this.name + ' makes stomp stomp';
+        console.log(this.name + ' makes stomp stomp');
     });
 
-var createAlligator = createSwimmingAnimal.ext(createTalkingAnimal.ext(createWalkingAnimal))
+var createAlligator = createSwimmingAnimal
+    .ext(createTalkingAnimal)
+    .ext(createWalkingAnimal)
+
     .val('name', 'alligator')
     .val('word', 'grrr');
 
-var createDuck = createFlyingAnimal.ext(createSwimmingAnimal.ext(createTalkingAnimal.ext(createWalkingAnimal)))
+var createDuck = createFlyingAnimal
+    .ext(createSwimmingAnimal)
+    .ext(createTalkingAnimal)
+    .ext(createWalkingAnimal)
+
     .val('name', 'duck')
     .val('word', 'quack');
 
-var createGoat = createTalkingAnimal.ext(createWalkingAnimal)
+var createGoat = createTalkingAnimal
+    .ext(createWalkingAnimal)
+
     .val('name', 'goat')
     .val('word', 'baa');
 
@@ -43,18 +52,18 @@ var createGoat = createTalkingAnimal.ext(createWalkingAnimal)
 
 var alligator = createAlligator();
 
-console.log(alligator.swim());
-console.log(alligator.talk());
-console.log(alligator.walk());
+alligator.swim(); // alligator makes splish splash
+alligator.talk(); // alligator says grrr
+alligator.walk(); // alligator makes stomp stomp
 
 var duck = createDuck();
 
-console.log(duck.fly());
-console.log(duck.swim());
-console.log(duck.talk());
-console.log(duck.walk());
+duck.fly(); // duck makes flap flap
+duck.swim(); // duck makes splish splash
+duck.talk(); // duck says quack
+duck.walk(); // duck makes stomp stomp
 
 var goat = createGoat();
 
-console.log(goat.talk());
-console.log(goat.walk());
+goat.talk(); // goat says baa
+goat.walk(); // goat makes stomp stomp
