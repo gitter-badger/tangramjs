@@ -46,7 +46,7 @@ var createObject = require('tangramjs').createObject;
 ### createObject
 
 This is the *abstract* base factory of Tangram.js.
-It describes no properties and can only create new immutable *empty* objects.
+It describes no properties, and thus, can only create new immutable *empty* objects.
 
 ### factory([spec])
 
