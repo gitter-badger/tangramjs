@@ -65,11 +65,11 @@ Creates a new factory by extending the factory on which this method is called wi
 
 ### factory._val(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for an **non-enumerable**, **non-writable** property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for a **non-enumerable**, **non-writable** property.
 
 ### factory._var(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for an **non-enumerable**, **writable** property.
+Creates a new factory by extending the factory on which this method is called with a new descriptor for a **non-enumerable**, **writable** property.
 
 ### factory.ext(otherFactory)
 
