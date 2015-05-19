@@ -45,35 +45,35 @@ var createObject = require('tangramjs').createObject;
 
 ### createObject
 
-This is the *abstract* base **factory** of Tangram.js.
-It describes no properties, and thus, can only create new immutable *empty* objects.
+This is the immutable base **factory** of Tangram.js.
+It has no property descriptors, and thus, it can only create new immutable *empty* objects.
 
 ### factory([spec])
 
-Creates a new object which has an immutable set of own properties and no prototype.
-Thus, such a created object with only non-writable properties and only immutable property values is **effectively immutable**.
+Creates a new object which has an **immutable** set of own properties and **no prototype**.
 
-With the optional argument `spec` the default values of specific properties, writable or not, can be overwritten at construction time (see [Example 2](#example-2-creating-an-object-that-behaves-like-it-inherits-from-objectprototype)).
+With the optional argument `spec` the default values of specific properties, writable or not, can be overwritten at construction time.
 
 ### factory.val(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for an **enumerable**, **non-writable** property.
+Creates a new immutable factory, copying all existing property descriptors and the new one. The new property descriptor takes precedence over the existing ones and describes an **enumerable** and **non-writable** property.
 
 ### factory.var(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for an **enumerable**, **writable** property.
+Creates a new immutable factory, copying all existing property descriptors and the new one. The new property descriptor takes precedence over the existing ones and describes an **enumerable** and **writable** property.
 
 ### factory._val(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for a **non-enumerable**, **non-writable** property.
+Creates a new immutable factory, copying all existing property descriptors and the new one. The new property descriptor takes precedence over the existing ones and describes an **non-enumerable** and **non-writable** property.
 
 ### factory._var(name[, defaultValue])
 
-Creates a new factory by extending the factory on which this method is called with a new descriptor for a **non-enumerable**, **writable** property.
+Creates a new immutable factory, copying all existing property descriptors and the new one. The new property descriptor takes precedence over the existing ones and describes an **non-enumerable** and **writable** property.
 
 ### factory.ext(otherFactory)
 
-Creates a new factory by extending another factory with all property descriptors of the factory on which this method is called.
+Creates a new immutable factory, copying all property descriptors of both factories.
+The property descriptors of the left-hand side factory are taking precedence over the other ones.
 
 ## References
 
@@ -93,7 +93,54 @@ Creates a new factory by extending another factory with all property descriptors
 
 ## Examples
 
-### Example 1: An Alligator, a Duck, and a Goat
+### An Alligator, a Duck, and a Goat
+
+Creating a new factory called `createAnimal`:
+
+```javascript
+var createAnimal = createObject
+    .val('name', 'animal');
+```
+
+Creating a new factory called `createFlyingAnimal`:
+
+```javascript
+var createFlyingAnimal = createAnimal
+    ._val('fly', function () {
+        console.log(this.name + ' makes flap flap');
+    });
+```
+
+Creating a new factory called `createSwimmingAnimal`:
+
+```javascript
+var createSwimmingAnimal = createAnimal
+    ._val('swim', function () {
+        console.log(this.name + ' makes splish splash');
+    });
+```
+
+Creating a new factory called `createTalkingAnimal`:
+
+```javascript
+var createTalkingAnimal = createAnimal
+    .val('word', '...')
+
+    ._val('talk', function () {
+        console.log(this.name + ' says ' + this.word);
+    });
+```
+
+Creating a new factory called `createWalkingAnimal`:
+
+```javascript
+var createWalkingAnimal = createAnimal
+    ._val('walk', function () {
+        console.log(this.name + ' makes stomp stomp');
+    });
+```
+
+Creating a new factory called `createAlligator`:
 
 ```javascript
 var createAlligator = createSwimmingAnimal
@@ -104,13 +151,7 @@ var createAlligator = createSwimmingAnimal
     .val('word', 'grrr');
 ```
 
-```javascript
-var alligator = createAlligator();
-
-alligator.swim(); // alligator makes splish splash
-alligator.talk(); // alligator says grrr
-alligator.walk(); // alligator makes stomp stomp
-```
+Creating a new factory called `createDuck`:
 
 ```javascript
 var createDuck = createFlyingAnimal
@@ -122,14 +163,7 @@ var createDuck = createFlyingAnimal
     .val('word', 'quack');
 ```
 
-```javascript
-var duck = createDuck();
-
-duck.fly(); // duck makes flap flap
-duck.swim(); // duck makes splish splash
-duck.talk(); // duck says quack
-duck.walk(); // duck makes stomp stomp
-```
+Creating a new factory called `createGoat`:
 
 ```javascript
 var createGoat = createTalkingAnimal
@@ -139,6 +173,29 @@ var createGoat = createTalkingAnimal
     .val('word', 'baa');
 ```
 
+Creating and using a new immutable object called `alligator`:
+
+```javascript
+var alligator = createAlligator();
+
+alligator.swim(); // alligator makes splish splash
+alligator.talk(); // alligator says grrr
+alligator.walk(); // alligator makes stomp stomp
+```
+
+Creating and using a new immutable object called `duck`:
+
+```javascript
+var duck = createDuck();
+
+duck.fly(); // duck makes flap flap
+duck.swim(); // duck makes splish splash
+duck.talk(); // duck says quack
+duck.walk(); // duck makes stomp stomp
+```
+
+Creating and using a new immutable object called `goat`:
+
 ```javascript
 var goat = createGoat();
 
@@ -146,48 +203,28 @@ goat.talk(); // goat says baa
 goat.walk(); // goat makes stomp stomp
 ```
 
-```javascript
-var createAnimal = createObject
-    .val('name', 'animal');
-```
+### Creating an object that behaves like it inherits from `Object.prototype`
+
+Creating a new factory called `createStandardObject`:
 
 ```javascript
-var createFlyingAnimal = createAnimal
-    ._val('fly', function () {
-        console.log(this.name + ' makes flap flap');
-    });
+var createStandardObject = createObject
+    ._val('hasOwnProperty', Object.prototype.hasOwnProperty)
+    ._val('propertyIsEnumerable', Object.prototype.propertyIsEnumerable)
+    ._val('toLocaleString', Object.prototype.toLocaleString)
+    ._val('toString', Object.prototype.toString)
+    ._val('valueOf', Object.prototype.valueOf);
 ```
 
-```javascript
-var createSwimmingAnimal = createAnimal
-    ._val('swim', function () {
-        console.log(this.name + ' makes splish splash');
-    });
-```
-
-```javascript
-var createTalkingAnimal = createAnimal
-    .val('word', '...')
-
-    ._val('talk', function () {
-        console.log(this.name + ' says ' + this.word);
-    });
-```
-
-```javascript
-var createWalkingAnimal = createAnimal
-    ._val('walk', function () {
-        console.log(this.name + ' makes stomp stomp');
-    });
-```
-
-### Example 2: Creating an object that behaves like it inherits from `Object.prototype`
+Creating a new factory called `createPerson`:
 
 ```javascript
 var createPerson = createStandardObject
     .val('name', 'John Doe')
     .val('age', 0);
 ```
+
+Creating and using a new immutable object called `person`:
 
 ```javascript
 var person = createPerson({
@@ -200,13 +237,4 @@ console.log(person.propertyIsEnumerable('name')); // true
 console.log(person.toLocaleString()); // [object Object]
 console.log(person.toString()); // [object Object]
 console.log(person.valueOf()); // { name: 'Jane Doe', age: 99 }
-```
-
-```javascript
-var createStandardObject = createObject
-    ._val('hasOwnProperty', Object.prototype.hasOwnProperty)
-    ._val('propertyIsEnumerable', Object.prototype.propertyIsEnumerable)
-    ._val('toLocaleString', Object.prototype.toLocaleString)
-    ._val('toString', Object.prototype.toString)
-    ._val('valueOf', Object.prototype.valueOf);
 ```
