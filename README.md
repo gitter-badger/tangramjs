@@ -1,5 +1,7 @@
 # Tangram.js
 
+[![Join the chat at https://gitter.im/clebert/tangramjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/clebert/tangramjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A library for class-free object-oriented programming in JavaScript.
 
 > I used to think that the important innovation of JavaScript was prototypal inheritance.
